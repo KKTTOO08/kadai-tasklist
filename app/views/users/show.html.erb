@@ -1,14 +1,8 @@
-<div class="row">
-  <aside class="col-sm-4">
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title"><%= @user.name %></h3>
-      </div>
-    </div>
-  </aside>
-  <div class="col-sm-8">
-    <ul class="nav nav-tabs nav-justified mb-3">
-      <li class="nav-item"><a href="#" class="nav-link">tasklists</a></li>
+
+
+ <% current_user.tasks.each do |task| %>
+    <ul>
+      <li>タスク：<%= task.content %></li>
+      <li>ステータス：<%= task.status %></li>
     </ul>
-  </div>
-</div>
+  <% end %>

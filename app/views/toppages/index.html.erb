@@ -2,6 +2,18 @@
   <div class="row">
     <aside class="col-sm-4">
       <%= form_with(model: @task) do |f| %>
+      
+      <% task = @task %>
+      <% if task.errors.any? %>
+        <div id="error_explanation">
+          <ul>
+            <% task.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+  
         <div class="mb-3">
           <%= f.label :content, 'タスク' %>
           <%= f.text_area :content, class: 'form-control', rows: 1 %>

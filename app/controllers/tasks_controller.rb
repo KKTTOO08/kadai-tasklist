@@ -22,8 +22,9 @@ class TasksController < ApplicationController
             flash[:success] = 'タスクが正常に記録されました'
             redirect_to root_url
         else
-            flash.now[:danger] = 'タスクが記録されませんでした'
-            render 'toppages/index'
+          @pagy, @tasks = pagy(current_user.tasks.order(id: :desc))
+          flash.now[:danger] = 'タスクの記録に失敗しました。'
+          render 'toppages/index'
         end
     end
     
