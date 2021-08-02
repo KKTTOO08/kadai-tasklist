@@ -1,22 +1,17 @@
 class TasksController < ApplicationController
     before_action :require_user_logged_in
-    before_action :correct_user, only: [:destroy, :update, :edit]
+    before_action :correct_user, only: [:show, :edit, :update, :destroy]
     
-  def index
-    if logged_in?
-      @task = current_user.tasks.build  # form_with 用
-      @pagy, @tasks = pagy(current_user.tasks.order(id: :desc))
+    def index
+        if logged_in?
+            @task = current_user.tasks.build
+            @pagy, @tasks = pagy(current_user.tasks.order(id: :desc))
+        end
     end
-  end
     
     def show
-        @task = Task.find(params[:id])
+        @task = current_user.tasks.find(params[:id])
     end
-    
-    #toppagesの方で作成
-    #def new
-        #@task = Task.new
-    #end
     
     def create
         @task = current_user.tasks.build(task_params)
@@ -27,15 +22,14 @@ class TasksController < ApplicationController
         else
           @pagy, @tasks = pagy(current_user.tasks.order(id: :desc))
           flash.now[:danger] = 'タスクの記録に失敗しました。'
-          render 'toppages/index'
+          render 'tasks/index'
         end
     end
     
     def edit
-        @task = Task.find(params[:id])
+        @task = current_user.tasks.find(params[:id])
     end
     
-    #要修正
     def update
         if @task.update(task_params)
         flash[:success] = 'タスクは正常に更新されました'

@@ -15,11 +15,11 @@
       <% end %>
   
         <div class="mb-3">
-          <%= f.label :content, 'タスク' %>
-          <%= f.text_area :content, class: 'form-control', rows: 1 %>
+          <p><%= f.label :content, 'タスク' %></P>
+          <P><%= f.text_field :content %></p>
           
-          <%= f.label :status, 'ステータス' %>
-          <%= f.text_area :status, class: 'form-control', rows: 1 %>
+          <p><%= f.label :status, 'ステータス' %></p>
+          <p><%= f.text_field :status %></p>
         </div>
         <%= f.submit 'Post', class: 'btn btn-primary w-100' %>
       <% end %>
